@@ -10,6 +10,7 @@ public class TicTacToe{
     public static String currentPlayer;
     public static String nextPlayer;
     public static String game="notdone";
+    public static char status ='Y';
     public static Scanner sc= new Scanner(System.in);
     public static char[] board;
     public static char[] board() {
@@ -95,15 +96,32 @@ public class TicTacToe{
         else
             computerMove();
     }
+    public static void game() {
+        System.out.println("\nEnter Y is you wanna play again"
+                + "\nEnter N to exit.");
+        String st = sc.next();
+        status = st.charAt(0);
+        if(status == 'N') {
+            System.out.println("----END----");
+            System.exit(0);
+        }
+        else {
+            board();
+            chooseLetter();
+            showBoard();
+            toss();
+        }
+    }
     public static void gameStatus() {
         int count = 0;
         if (board[1] == board[2] && board[1] == board[3] && board[1] != ' '|| board[4] == board[5] && board[4] == board[6] && board[4] != ' '|| board[7] == board[8] && board[8] == board[9] && board[7] != ' '
                 || board[1] == board[4] && board[1] == board[7] && board[1] != ' ' || board[2] == board[5] && board[2] == board[8] && board[2] != ' '|| board[3] == board[6] && board[3] == board[9] && board[3] != ' '
                 || board[1] == board[5] && board[1] == board[9] && board[1] != ' '|| board[3] == board[5] && board[3] == board[7] && board[3] != ' ')
         {
-            System.out.println("\n"+ currentPlayer+"won");
-            System.out.println("\nGame over.");
-            System.exit(0);
+            System.out.println("\n"+ currentPlayer+"won. Game Over.");
+            game();
+
+
         }
         else {
             play();
@@ -117,7 +135,8 @@ public class TicTacToe{
         }
         if (count == 9) {
             System.out.println("\nIts a tie");
-            System.exit(0);
+            game();
+
         }
 
 
@@ -259,12 +278,14 @@ public class TicTacToe{
         System.out.println("Choice letter X or 0 for player");
         String choice = sc.nextLine();
         player_choice=choice.charAt(0);
-        board = board();
-        chooseLetter();
-        showBoard();
-        toss();
-        while(game.equals("notdone")) {
-            gameStatus();
+        while(status == 'Y'){
+            board = board();
+            chooseLetter();
+            showBoard();
+            toss();
+            while(game.equals("notdone")) {
+                gameStatus();
+            }
         }
         sc.close();
     }
