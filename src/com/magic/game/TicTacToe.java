@@ -1,19 +1,38 @@
 package com.magic.game;
-
-public class TicTacToe {
-    public static final int boardSize = 10;
-    char computer = ' ';
-    char player = ' ';
-    public static char board[] = new char[boardSize];
-
-    public static void board(){
-        for(int i = 0; i < boardSize; i++)
-            board[i] = ' ';
-        System.out.println("Welcome to TicTacToe Game!");
+import java.util.*;
+public class TicTacToe{
+    private static String player_choice;
+    private static String computer_choice;
+    public char[] board;
+    public static char[] Board() {
+        char[] board = new char[10];
+        for(int i=1; i<board.length; i++) {
+            board[i]=' ';
+        }
+        return board;
     }
 
-    public static void main(String[] args){
-        System.out.println("Welcome To Tic-Tac_Toe Game");
-        board();
+    public static void chooseLetter() {
+
+
+        if (player_choice.equals("X")) {
+            computer_choice = "0";
+            System.out.println("Computer letter is: "+ computer_choice);
+        }
+        else {
+            computer_choice = "X";
+            System.out.println("Computer letter is: "+ computer_choice);
+        }
+    }
+
+    public static void main(String[] args) {
+
+        Scanner sc= new Scanner(System.in);
+        System.out.println("Choice letter X or 0 for player");
+        player_choice = sc.nextLine();
+        System.out.println("Welcome to TicTacToe Game");
+        char[] board = Board();
+        chooseLetter();
+        sc.close();
     }
 }
